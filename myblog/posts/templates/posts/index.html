@@ -1,0 +1,14 @@
+<h1>Posts:</h1>
+
+<article>
+{% if all_posts %}
+    {% for post in all_posts%}
+        <section>
+            <h4{{post.title}}></h4>
+            <p>{{post.content | truncatewords:24}}...</p>
+        </section>
+    {% endfor %}
+{% else %}
+    <h3> Nie ma postów </h3>
+{% endif %}
+</article>
