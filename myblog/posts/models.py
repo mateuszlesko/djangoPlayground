@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.deletion import CASCADE
 from django.utils import timezone
 
 # Create your models here.
@@ -16,3 +17,4 @@ class Post(models.Model):
 
     def __str__(self):
         return f"{self.title}\n {self.content}"
+

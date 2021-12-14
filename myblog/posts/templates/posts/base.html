@@ -1,0 +1,18 @@
+{% load static %}
+<html>
+    <head>
+        <title>Mój blog</title>
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{% static 'css/posts.css' %}">     
+    </head>
+    <body>
+        <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+            {% block content %}
+            {% endblock %}
+            </div>
+        </div>
+    </body>
+
+</html>
