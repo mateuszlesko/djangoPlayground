@@ -1,14 +1,16 @@
-<h1>Posts:</h1>
-
-<article>
-{% if all_posts %}
-    {% for post in all_posts%}
-        <section>
-            <h4{{post.title}}></h4>
-            <p>{{post.content | truncatewords:24}}...</p>
-        </section>
-    {% endfor %}
-{% else %}
-    <h3> Nie ma postów </h3>
-{% endif %}
-</article>
+{% extends 'posts/base.html' %}
+    {% block content %}
+    {% if request.user.is_authenticated %}
+        <a href="{% url "posts:create" %}" class="button"><span>Stwórz post</span></a>
+    {% endif %}
+        {% for post in all_posts%}
+            <section>
+                <p>opublikowano: {{post.published_date}}</p>
+                <h4><a href="{% url 'posts:details' post.id %}">{{post.title}}</a></h4>
+                <p>{{post.content | truncatewords:24}}...</p>
+                <hr/>
+            </section>
+        {% empty %}
+            <h3>Nie ma postów</h3>
+        {% endfor %}
+    {% endblock %}

@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300&display=swap');
+body{
+    margin: 0;
+}
+.container{
+    max-width: 1200px;
+    margin: auto;
+    position: relative;
+    font-family: "Source Sans Pro", Georgia, 'Times New Roman', Times, serif;
+    transition: margin-left .5s;
+    padding: 16px;
+}
+.przedstawienie{
+    display: flex;
+}
+
+h1, h3, h4{
+    font-family: Verdana, Tahoma, sans-serif;
+}
+.spisTresci{
+    margin: 10px 20px 40px
+}
+.prawaRamka{
+    max-width: 240px;
+    position: relative;
+    float: right;
+    border: 1px solid #a2a9b1;
+}
+.pudelkoZdjecie{
+    box-shadow: 10px 10px 5px grey;
+    border: 1px solid #a2a9b1;
+}
+.zdjeciePostaci{
+    border: 1px solid #a2a9b1;
+}
+.tytulRamki{
+    margin:auto;
+    background-color:coral;
+    border: 1px solid #a2a9b1;
+    text-align: center;
+}
+.tresc{
+    max-width: 960px;
+    margin-right: 20px;
+}
+#zdj1Podpis, #zdj2Podpis{
+    text-align: center;
+    font-size: 12px;
+}
+#zdj2Podpis{
+    margin:20px;
+}
+#zdj1{
+    max-width: 240px;
+}
+#zdj2{
+    max-width: 240px;
+    max-height: 360px;
+}
+.trescZeZdjeciem{
+    display: flex;
+}
+.zdjecieSekcji{
+    max-width: 240px;
+    float:right;
+    margin-left: 20px;
+    padding-left: 8px;
+}
+
+.loginSection{
+    float:right
+}
+
+a.button{
+  background-color: #008CBA;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+table{
+    background-color: #f8f9fa;
+    color: #202122;
+    margin: 1em 0;
+    border: 1px solid #a2a9b1;
+    border-collapse: collapse;
+    box-sizing: border-box;
+    text-indent: initial;
+    border-spacing: 2px;
+}
+th{
+    background-color:#a2a9b1;
+}
+td,th,tr{
+    border: 1px solid #a2a9b1;
+}
+#tabelaFilmow{
+    width: 100%;
+}
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+  
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+  
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+
+  .menuButton{
+    font-size:30px;
+    cursor:pointer;
+    padding-left: 10px;
+  }
+  .logo{
+    width: 100px;
+    height: auto;
+    margin-left: 50px;
+  }
+
+  .sidenav h4{
+      padding-left: 30px;
+      color: #818181;
+  }
+  
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+
+.topnav {
+    width: 100%;
+    top:0;
+    background-color:lavender;
+    overflow: hidden;
+}
+   
+@media only screen and (max-width: 600px) {
+    .menuButton{
+        font-size: 18px;
+    }
+    .zdjecieSekcji{
+        width: 40%;
+        height: auto;
+    }
+    .logo{
+        width: 80px;
+        height: auto;
+        margin-left: 20px;
+    }
+}
+@media print {
+    #menuSidenav, #topnavID, .menuButton, .topnav, .materialFilmowy{
+        display: none;
+    }
+}
