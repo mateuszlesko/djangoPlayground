@@ -66,6 +66,22 @@ h1, h3, h4{
     margin-left: 20px;
     padding-left: 8px;
 }
+
+.loginSection{
+    float:right
+}
+
+a.button{
+  background-color: #008CBA;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
 table{
     background-color: #f8f9fa;
     color: #202122;

@@ -11,6 +11,11 @@
         {% include 'posts/menu.html' %}
         <nav class="topnav" id="topnavID">
             <span class ="menuButton" onclick="openNav()">&#9776; Menu</span>
+            <div class="loginSection" style="float:right;">
+                {% if not request.user.is_authenticated %}
+                    <a href="/admin/login/?next=/posts/">Zaloguj</a>
+                {% endif %}
+            </div>
         </nav>
         <div class="content container">
         <div class="row">
