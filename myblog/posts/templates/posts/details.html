@@ -15,6 +15,9 @@
         {% endif %}
         <h4>{{ postDetails.title }}</h4>
         <p>{{ postDetails.content}}</p>
-        
+        <p>{{postDetails.map}}</p>
+        <img src="{{postDetails.image.url }}" class="img-responsive" style="width: 40%; float: left; margin-right: 10px;" />
+        <iframe src="https://www.google.com/maps/embed?pb={{postDetails.map}}" width="460" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        {% comment %} <iframe src="{{ postDetails.map }}" width="600" height="450" style="border:0;" allowfullscreen=""></iframe> {% endcomment %}
     </div>
 {% endblock %}
