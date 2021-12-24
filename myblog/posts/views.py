@@ -1,5 +1,4 @@
-from django.http import HttpResponse
-from django.http import HttpResponseRedirect 
+from django.http import HttpResponse, HttpResponseRedirect 
 from django.shortcuts import get_object_or_404, redirect, render
 from django.http.response import Http404
 from django.template import loader
@@ -37,13 +36,15 @@ def create(request):
 
     if request.user.is_authenticated:
         if request.method == "POST":
-            form = PostingForm(request.POST)
+            form = PostingForm(request.POST,request.FILES)
             if form.is_valid():
-                post = form.save(commit=False)
-                post.author = request.user
-                post.published_date = timezone.now()
-                post.save()
-                return redirect("details",id=post.id)
+                if(request.FILES != 0):
+                    print(request.FILES)
+                    post = form.instance
+                    post.author = request.user
+                    post.published_date = timezone.now()
+                    post.save()
+                    return redirect("posts:details",id=post.id)
         else:
             form = PostingForm()
             return render(request,"posts/create.html",{"form":form})
@@ -54,9 +55,10 @@ def edit(request,pk):
     post = get_object_or_404(Post, pk=pk)
     #check what state of request is, is user sent data from form
     if request.method == "POST":
-        form = PostingForm(request.POST, instance=post)
+        form = PostingForm(request.POST, request.FILES,instance=post)
         if form.is_valid():
-            post = form.save(commit=False)
+            post = form.instance
+            print(form.instance)
             post.author = request.user
             post.published_date = timezone.now()
             post.save()
