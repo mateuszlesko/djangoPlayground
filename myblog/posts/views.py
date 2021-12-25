@@ -39,7 +39,6 @@ def create(request):
             form = PostingForm(request.POST,request.FILES)
             if form.is_valid():
                 if(request.FILES != 0):
-                    print(request.FILES)
                     post = form.instance
                     post.author = request.user
                     post.published_date = timezone.now()

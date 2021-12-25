@@ -1,23 +1,25 @@
 {% extends 'posts/base.html' %}
+{% load static %}
 {% block content %}
     <div class="post">
-        {% if postDetails.published_date %}
+        {% csrf_token %}
+        {% if user.is_authenticated and currentUser == authorUser  %}
+            <a class="btn btn-default" href="{% url 'posts:edit' pk=postDetails.pk %}">Edytuj</a>
+             <a class="btn btn-default" href="{% url 'posts:delete' id=postDetails.id %}">Usuń</a>
+        {% endif %}
+         {% if postDetails.published_date %}
             <div class="date">
-                {{ postDetails.published_date }}
+              <span> Upublikowany:  {{ postDetails.published_date }} przez <em>{{postDetails.author}}</em></span> 
             </div>
         {% endif %}
-        {% if user.is_authenticated %}
-            <a class="btn btn-default" href="{% url 'posts:edit' pk=postDetails.pk %}">Edytuj</a>
-        {% endif %}
-        {% if user.is_authenticated and currentUser == authorUser %}
-            {% csrf_token %}
-            <a class="btn btn-default" href="{% url 'posts:delete' id=postDetails.id %}">Usuń</a>
-        {% endif %}
-        <h4>{{ postDetails.title }}</h4>
+            <h2>{{ postDetails.title }}</h2>
+            <hr/>
+        <h3>O miejscu</h3>
         <p>{{ postDetails.content}}</p>
-        <p>{{postDetails.map}}</p>
-        <img src="{{postDetails.image.url }}" class="img-responsive" style="width: 40%; float: left; margin-right: 10px;" />
-        <iframe src="https://www.google.com/maps/embed?pb={{postDetails.map}}" width="460" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-        {% comment %} <iframe src="{{ postDetails.map }}" width="600" height="450" style="border:0;" allowfullscreen=""></iframe> {% endcomment %}
+         <figure>
+            <img src="{{postDetails.image.url }}" class="img-responsive" style="width: 80%; height:60%; float: left; margin-right: 10px;" />
+            <span class="pictureDescription">Adres miejsca: {{postDetails.address}}</span>
+        </figure>
+        
     </div>
 {% endblock %}
