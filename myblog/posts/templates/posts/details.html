@@ -1,25 +1,26 @@
 {% extends 'posts/base.html' %}
 {% load static %}
 {% block content %}
-    <div class="post">
+    <div class="cardContainer">
         {% csrf_token %}
         {% if user.is_authenticated and currentUser == authorUser  %}
             <a class="btn btn-default" href="{% url 'posts:edit' pk=postDetails.pk %}">Edytuj</a>
              <a class="btn btn-default" href="{% url 'posts:delete' id=postDetails.id %}">Usuń</a>
         {% endif %}
-         {% if postDetails.published_date %}
+        <div class="cardContent">
+        <div class="content-text">
             <div class="date">
-              <span> Upublikowany:  {{ postDetails.published_date }} przez <em>{{postDetails.author}}</em></span> 
+                <span> Upublikowany:  {{ postDetails.published_date }} przez <em>{{postDetails.author}}</em></span> 
             </div>
-        {% endif %}
-            <h2>{{ postDetails.title }}</h2>
+            <h2 class="content-title">{{ postDetails.title }}</h2>
             <hr/>
-        <h3>O miejscu</h3>
-        <p>{{ postDetails.content}}</p>
-         <figure>
-            <img src="{{postDetails.image.url }}" class="img-responsive" style="width: 80%; height:60%; float: left; margin-right: 10px;" />
-            <span class="pictureDescription">Adres miejsca: {{postDetails.address}}</span>
-        </figure>
-        
+            <h3>O miejscu</h3>
+            <p class="content-paragraph">{{ postDetails.content}}</p>
+            <figure>
+                <img src="{{postDetails.image.url }}" class="img-responsive" style="width: 80%; height:60%; float: left; margin-right: 10px;" />
+                <span class="pictureDescription">Adres miejsca: {{postDetails.address}}</span>
+            </figure>
+        </div>
+        </div>
     </div>
 {% endblock %}

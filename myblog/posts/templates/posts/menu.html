@@ -1,14 +1,15 @@
     <aside id="menuSidenav" class="sidenav">
-            <div id="linkList">
+            <div class="linkList">
                 <img src="/media/logo.png" class="logo" height="auto"/>
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                <a href="https://pl.wikipedia.org/wiki/Wikipedia:Strona_g%C5%82%C3%B3wna">Strona główna</a>
-                <a href="https://pl.wikipedia.org/wiki/Portal:Kategorie_G%C5%82%C3%B3wne">Kategorie artykułów</a>
-                <a href="https://pl.wikipedia.org/wiki/Wikipedia:Wyr%C3%B3%C5%BCniona_zawarto%C5%9B%C4%87_Wikipedii">Najlepsze artykuły</a>
-                <a href="https://pl.wikipedia.org/wiki/Pomoc:FAQ">Częste pytania</a>
-                <h4>Dla czytelników</h4>
+                {% if not request.user.is_authenticated %}
+                    <a class="menuButton" href="/admin/login/?next=/posts/">Zaloguj</a>
+                {% else %}
+                    <span>{{request.user}}</span>
+                    <a href="{% url "posts:create" %}" class="btn">Stwórz post</a>
+                    <a href="/welcome/profile">Twój profil</a>
+                {% endif %}
                 <hr/>
-                <a href="https://pl.wikipedia.org/wiki/Wikipedia:O_Wikipedii">O Wikipedii</a>
-                <a href="https://donate.wikimedia.org/w/index.php?title=Special:LandingPage&country=PL&uselang=pl&utm_medium=sidebar&utm_source=donate&utm_campaign=C13_pl.wikipedia.org">Wspomóż</a>
+                <a href="/">Strona główna</a>
             </div>
     </aside>

@@ -9,6 +9,31 @@ body{
     font-family: "Source Sans Pro", Georgia, 'Times New Roman', Times, serif;
     padding: 16px;
 }
+header {
+  background: white;
+  width: 100%;
+  top:0;
+  overflow: hidden;
+  display: inline-block;
+  padding-bottom: 10px;
+  border-bottom: 0.1rem solid azure;
+  border-bottom: 1px solid orange;
+}
+header a {
+  display: block;
+  text-decoration: none;
+  outline: none;  
+  transition: .3s ease-in-out;
+}
+div.titleContainer{
+  text-align: center;
+}
+.title{
+    color: #000;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5em;
+    padding: 10px 0;
+}
 h1, h3, h4{
     font-family: Verdana, Tahoma, sans-serif;
 }
@@ -26,7 +51,8 @@ span.pictureDescription{
 }
 
 .loginSection{
-    float:right
+    float:right;
+    display:inline-block;
 }
 
 a.button{
@@ -79,7 +105,9 @@ a.button{
     font-size:30px;
     cursor:pointer;
     padding-left: 10px;
+    display: inline-block;
   }
+
   .logo{
     width: 100px;
     height: auto;
@@ -95,13 +123,6 @@ a.button{
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
   }
-
-.topnav {
-    width: 100%;
-    top:0;
-    background-color:lavender;
-    overflow: hidden;
-}
    
 @media only screen and (max-width: 600px) {
     .menuButton{

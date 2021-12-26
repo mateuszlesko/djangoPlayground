@@ -1,14 +1,17 @@
 {% extends 'posts/base.html' %}
     {% block content %}
-    {% if request.user.is_authenticated %}
-        <a href="{% url "posts:create" %}" class="button"><span>Stwórz post</span></a>
-    {% endif %}
         {% for post in all_posts%}
             <section>
-                <p>opublikowano: {{post.published_date}}</p>
-                <h4><a href="{% url 'posts:details' post.id %}">{{post.title}}</a></h4>
-                <p>{{post.content | truncatewords:24}}...</p>
-                <hr/>
+                <div class="cardContainer">
+                    <div class="cardContent">
+                         <div class="content-text">
+                            <p>opublikowano: {{post.published_date}}</p>
+                            <h2 class="content-title">{{post.title}}</h2>
+                            <p class="content-paragraph">{{post.content | truncatewords:24}}...</p>
+                            <a href="{% url 'posts:details' post.id %}" class="btn">Zobacz więcej</a>
+                        </div>
+                    </div>
+                </div>
             </section>
         {% empty %}
             <h3>Nie ma postów</h3>
