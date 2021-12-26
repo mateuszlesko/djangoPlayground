@@ -7,68 +7,52 @@ body{
     margin: auto;
     position: relative;
     font-family: "Source Sans Pro", Georgia, 'Times New Roman', Times, serif;
-    transition: margin-left .5s;
     padding: 16px;
 }
-.przedstawienie{
-    display: flex;
+header {
+  background: white;
+  width: 100%;
+  top:0;
+  overflow: hidden;
+  display: inline-block;
+  padding-bottom: 10px;
+  border-bottom: 0.1rem solid azure;
+  border-bottom: 1px solid orange;
 }
-
+header a {
+  display: block;
+  text-decoration: none;
+  outline: none;  
+  transition: .3s ease-in-out;
+}
+div.titleContainer{
+  text-align: center;
+}
+.title{
+    color: #000;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5em;
+    padding: 10px 0;
+}
 h1, h3, h4{
     font-family: Verdana, Tahoma, sans-serif;
 }
 .spisTresci{
     margin: 10px 20px 40px
 }
-.prawaRamka{
-    max-width: 240px;
-    position: relative;
-    float: right;
-    border: 1px solid #a2a9b1;
-}
-.pudelkoZdjecie{
-    box-shadow: 10px 10px 5px grey;
-    border: 1px solid #a2a9b1;
-}
-.zdjeciePostaci{
-    border: 1px solid #a2a9b1;
-}
-.tytulRamki{
-    margin:auto;
-    background-color:coral;
-    border: 1px solid #a2a9b1;
-    text-align: center;
-}
+
 .tresc{
     max-width: 960px;
     margin-right: 20px;
 }
-#zdj1Podpis, #zdj2Podpis{
-    text-align: center;
-    font-size: 12px;
-}
-#zdj2Podpis{
-    margin:20px;
-}
-#zdj1{
-    max-width: 240px;
-}
-#zdj2{
-    max-width: 240px;
-    max-height: 360px;
-}
-.trescZeZdjeciem{
-    display: flex;
-}
-.zdjecieSekcji{
-    max-width: 240px;
-    float:right;
-    margin-left: 20px;
-    padding-left: 8px;
+
+span.pictureDescription{
+    display: inline-block;
 }
 
 .loginSection{
-    float:right
+    float:right;
+    display:inline-block;
 }
 
 a.button{
@@ -82,25 +66,7 @@ a.button{
   display: inline-block;
   font-size: 16px;
 }
-table{
-    background-color: #f8f9fa;
-    color: #202122;
-    margin: 1em 0;
-    border: 1px solid #a2a9b1;
-    border-collapse: collapse;
-    box-sizing: border-box;
-    text-indent: initial;
-    border-spacing: 2px;
-}
-th{
-    background-color:#a2a9b1;
-}
-td,th,tr{
-    border: 1px solid #a2a9b1;
-}
-#tabelaFilmow{
-    width: 100%;
-}
+
 .sidenav {
     height: 100%;
     width: 0;
@@ -108,7 +74,7 @@ td,th,tr{
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #111;
+    background-color: #fff;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
@@ -139,7 +105,9 @@ td,th,tr{
     font-size:30px;
     cursor:pointer;
     padding-left: 10px;
+    display: inline-block;
   }
+
   .logo{
     width: 100px;
     height: auto;
@@ -155,21 +123,10 @@ td,th,tr{
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
   }
-
-.topnav {
-    width: 100%;
-    top:0;
-    background-color:lavender;
-    overflow: hidden;
-}
    
 @media only screen and (max-width: 600px) {
     .menuButton{
         font-size: 18px;
-    }
-    .zdjecieSekcji{
-        width: 40%;
-        height: auto;
     }
     .logo{
         width: 80px;
