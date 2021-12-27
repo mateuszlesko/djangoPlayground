@@ -4,8 +4,8 @@ from django.http.response import Http404
 from django.template import loader
 from django.utils import timezone
 
-from .models import Post
-from .forms import PostingForm
+from .models import Place, Post
+from .forms import PostingForm, PlaceForm
 
 # Create your views here.
 def index(request):
@@ -78,3 +78,4 @@ def delete(request,id):
     else:
         content={"errorMessage":"Dany post nie istnieje"}
         return redirect("posts:404",content=content)
+    
