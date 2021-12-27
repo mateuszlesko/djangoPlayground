@@ -18,7 +18,7 @@ class Post(models.Model):
     published_date = models.DateTimeField(default = timezone.now)
     author = models.ForeignKey('auth.User',on_delete=models.CASCADE)
     image = models.ImageField(upload_to='images/', blank=True, default="default.png")
-    place = models.OneToOneField(Place, on_delete= models.CASCADE, primary_key=False)
+    place = models.OneToOneField(Place, on_delete= models.CASCADE, primary_key=False,verbose_name="place where it is")
     
     def publish(self):
         self.published_date = timezone.now()

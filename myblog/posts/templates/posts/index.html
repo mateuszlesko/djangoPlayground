@@ -1,5 +1,6 @@
 {% extends 'posts/base.html' %}
     {% block content %}
+    {% include 'posts/townFilter.html' %}
         {% for post in all_posts%}
             <section>
                 <div class="cardContainer">

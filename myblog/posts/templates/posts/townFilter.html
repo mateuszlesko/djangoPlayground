@@ -1,0 +1,12 @@
+{% load static %}
+<form method="POST" action="/posts/">
+    {% csrf_token %}
+    <label>Wybierz miasto </label>
+    <select name="town" id="town-select">
+            <option value=""></option>
+        {% for town in all_towns%}
+            <option value="{{town}}">{{town}}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Szukaj" class="btn">
+</form>
