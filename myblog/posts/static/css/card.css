@@ -8,6 +8,7 @@
     display: flex;
     background-color: #fff;
     box-shadow: .5rem .5rem 1rem rgba(0,0,0,0.5);
+    margin-bottom: 20px;
 }
 
 .content-text{
@@ -30,7 +31,7 @@
 }
 
 .content-text .content-paragraph{
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     margin-bottom: 2rem;
 }
 

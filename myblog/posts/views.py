@@ -4,17 +4,28 @@ from django.http.response import Http404
 from django.template import loader
 from django.utils import timezone
 
-from .models import Post
-from .forms import PostingForm
+from .models import Place, Post
+from .forms import PostingForm, PlaceForm
 
 # Create your views here.
+
+towns = Place.objects.all()
+
 def index(request):
-    posts = Post.objects.all()
-    template = loader.get_template("posts/index.html")
-    context = {
-        "all_posts": reversed(list(posts))
-    }
-    return HttpResponse(template.render(context,request))
+    if request.method == "GET":
+        posts = Post.objects.all()
+        template = loader.get_template("posts/index.html")
+        context = {
+            "all_posts": reversed(list(posts)),
+            "all_towns": towns
+        }
+        return HttpResponse(template.render(context,request))
+    else:
+        submit = request.POST.get("submit")
+        form = PlaceForm(request.POST)
+        town = form["town"].value()
+        context =Post.objects.filter(place__town = town)
+        return render(request,"posts/index.html",{"all_posts":context,"all_towns":towns})
 
 def details(request, id):
     try:
@@ -78,3 +89,6 @@ def delete(request,id):
     else:
         content={"errorMessage":"Dany post nie istnieje"}
         return redirect("posts:404",content=content)
+
+def townFilter(request):
+    pass
