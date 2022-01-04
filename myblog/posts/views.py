@@ -102,22 +102,3 @@ def delete(request,id):
     else:
         content={"errorMessage":"Dany post nie istnieje"}
         return redirect("posts:404",content=content)
-
-def addComment(request,id):
-    if request.user.is_authenticated:
-        if request.method == "POST":
-            form = CommentForm(request.POST)
-            if form.is_valid():
-                comment = Comment()
-                comment.author = request.user
-                comment.text = form["text"].value()
-                comment.created_date = timezone.now()
-                comment.post_id = id
-                comment.save()
-                return redirect("posts:details",id=id)
-        else:
-            form = CommentForm()
-            return render(request,"posts/create.html",{"form":form})
-    
-    else:
-        return redirect("posts:index")
