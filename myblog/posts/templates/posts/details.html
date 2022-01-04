@@ -29,12 +29,15 @@
     {% else %}
         <h2>Zaloguj się aby dodać komentarz</h2>
     {% endif %}
-    <div>
+    <hr/>
+    <h4>Komentarze</h4>
     {% for comment in comments%}
-    <p>{{comment.author}} dodał {{comment.created_date}}</p>
-    <p>{{comment.text}}</p>
+     <div>
+        <p><strong>{{comment.author}}</strong> dodał {{comment.created_date}}</p>
+        <p>{{comment.text}}</p>
     </div>
     {% empty %}
     <h2>Nie ma komentarzy</h2>
     {% endfor %}
+    
 {% endblock %}
