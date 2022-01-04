@@ -23,4 +23,21 @@
         </div>
         </div>
     </div>
+    {% if user.is_authenticated %}
+    {% include 'posts/addcomments.html' %}
+     {% comment %} <a href="{% url 'posts:createComment' postDetails.id %}" class="btn">Dodaj komentarz</a> {% endcomment %}
+    {% else %}
+        <h2>Zaloguj się aby dodać komentarz</h2>
+    {% endif %}
+    <hr/>
+    <h4>Komentarze</h4>
+    {% for comment in comments%}
+     <div>
+        <p><strong>{{comment.author}}</strong> dodał {{comment.created_date}}</p>
+        <p>{{comment.text}}</p>
+    </div>
+    {% empty %}
+    <h2>Nie ma komentarzy</h2>
+    {% endfor %}
+    
 {% endblock %}

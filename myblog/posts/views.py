@@ -4,8 +4,8 @@ from django.http.response import Http404
 from django.template import loader
 from django.utils import timezone
 
-from .models import Place, Post
-from .forms import PostingForm, PlaceForm
+from .models import Comment, Place, Post
+from .forms import CommentForm, PostingForm, PlaceForm
 
 # Create your views here.
 
@@ -29,14 +29,27 @@ def index(request):
 
 def details(request, id):
     try:
-        post = Post.objects.get(id = id)
-        template = loader.get_template("posts/details.html")
-        context = {
-            "postDetails":post,
-            "currentUser":request.user,
-            "authorUser":post.author
-        }
-        return HttpResponse(template.render(context,request))
+        if request.method == "GET":
+            post = Post.objects.get(id = id)
+            template = loader.get_template("posts/details.html")
+            context = {
+                "postDetails":post,
+                "currentUser":request.user,
+                "authorUser":post.author,
+                "comments": Comment.objects.filter(post__id = id)
+            }
+            return HttpResponse(template.render(context,request))
+        else:
+            if request.method == "POST":
+                form = CommentForm(request.POST)
+                if form.is_valid():
+                    comment = Comment()
+                    comment.author = request.user
+                    comment.text = form["text"].value()
+                    comment.created_date = timezone.now()
+                    comment.post_id = id
+                    comment.save()
+                    return redirect("posts:details",id=id)
     except Post.DoesNotExist:
         raise Http404("Post doesn't exists")
     
@@ -90,5 +103,21 @@ def delete(request,id):
         content={"errorMessage":"Dany post nie istnieje"}
         return redirect("posts:404",content=content)
 
-def townFilter(request):
-    pass
+def addComment(request,id):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                comment = Comment()
+                comment.author = request.user
+                comment.text = form["text"].value()
+                comment.created_date = timezone.now()
+                comment.post_id = id
+                comment.save()
+                return redirect("posts:details",id=id)
+        else:
+            form = CommentForm()
+            return render(request,"posts/create.html",{"form":form})
+    
+    else:
+        return redirect("posts:index")
