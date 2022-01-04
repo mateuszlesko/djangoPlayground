@@ -1,7 +1,7 @@
 from django.db.models import fields
 from django.utils import timezone
 from django import forms
-from .models import Place, Post
+from .models import Comment, Place, Post
 
 class PostingForm(forms.ModelForm):
     class Meta: 
@@ -12,4 +12,9 @@ class PlaceForm(forms.ModelForm):
     class Meta:
         model = Place
         fields = ("town",)
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ("text",)
 

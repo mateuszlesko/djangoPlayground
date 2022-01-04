@@ -18,7 +18,7 @@ class Post(models.Model):
     published_date = models.DateTimeField(default = timezone.now)
     author = models.ForeignKey('auth.User',on_delete=models.CASCADE)
     image = models.ImageField(upload_to='images/', blank=True, default="default.png")
-    place = models.OneToOneField(Place, on_delete= models.CASCADE, primary_key=False,verbose_name="place where it is")
+    place = models.ForeignKey(Place, on_delete= models.CASCADE,verbose_name="place where it is")
     
     def publish(self):
         self.published_date = timezone.now()
@@ -26,3 +26,10 @@ class Post(models.Model):
 
     def __str__(self):
         return f"{self.title}\n {self.content}"
+
+
+class Comment(models.Model):
+    text = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    author = models.ForeignKey('auth.User',on_delete=models.CASCADE)
+    post = models.ForeignKey(Post,on_delete=models.CASCADE)
