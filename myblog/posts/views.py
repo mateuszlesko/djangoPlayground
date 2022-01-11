@@ -41,14 +41,17 @@ def details(request, id):
             return HttpResponse(template.render(context,request))
         else:
             if request.method == "POST":
-                form = CommentForm(request.POST)
-                if form.is_valid():
-                    comment = Comment()
-                    comment.author = request.user
-                    comment.text = form["text"].value()
-                    comment.created_date = timezone.now()
-                    comment.post_id = id
-                    comment.save()
+                if request.user.has_perm('posts.add_comment'):
+                    form = CommentForm(request.POST)
+                    if form.is_valid():
+                        comment = Comment()
+                        comment.author = request.user
+                        comment.text = form["text"].value()
+                        comment.created_date = timezone.now()
+                        comment.post_id = id
+                        comment.save()
+                        return redirect("posts:details",id=id)
+                else:
                     return redirect("posts:details",id=id)
     except Post.DoesNotExist:
         raise Http404("Post doesn't exists")
@@ -59,46 +62,65 @@ def details(request, id):
 def create(request):
 
     if request.user.is_authenticated:
-        if request.method == "POST":
-            form = PostingForm(request.POST,request.FILES)
-            if form.is_valid():
-                if(request.FILES != 0):
-                    post = form.instance
-                    post.author = request.user
-                    post.published_date = timezone.now()
-                    post.save()
-                    return redirect("posts:details",id=post.id)
+        if request.user.has_perm('posts.add_post'):
+            if request.method == "POST":
+                form = PostingForm(request.POST,request.FILES)
+                if form.is_valid():
+                    if(request.FILES != 0):
+                        post = form.instance
+                        post.author = request.user
+                        post.published_date = timezone.now()
+                        post.save()
+                        return redirect("posts:details",id=post.id)
+            else:
+                form = PostingForm()
+                return render(request,"posts/create.html",{"form":form})
         else:
-            form = PostingForm()
-            return render(request,"posts/create.html",{"form":form})
+            return redirect('posts:403')
     else:
         return redirect("/admin/login/?next=/posts/create")
 
 def edit(request,pk):
-    post = get_object_or_404(Post, pk=pk)
-    #check what state of request is, is user sent data from form
-    if request.method == "POST":
-        form = PostingForm(request.POST, request.FILES,instance=post)
-        if form.is_valid():
-            post = form.instance
-            print(form.instance)
-            post.author = request.user
-            post.published_date = timezone.now()
-            post.save()
-            return redirect('posts:details', id=post.id)
+    if request.user.is_authenticated and request.user.has_perm('posts.edit_post'):
+        post = get_object_or_404(Post, pk=pk)
+        #check what state of request is, is user sent data from form
+        if post.author == request.user:
+            if request.method == "POST":
+                form = PostingForm(request.POST, request.FILES,instance=post)
+                if form.is_valid():
+                    post = form.instance
+                    print(form.instance)
+                    post.author = request.user
+                    post.published_date = timezone.now()
+                    post.save()
+                    return redirect('posts:details', id=post.id)
+            else:
+                form = PostingForm(instance=post)
+            #or he want to edit something
+            return render(request, 'posts/edit.html', {'form': form}) 
+        else:
+            return redirect("posts:403")
     else:
-        form = PostingForm(instance=post)
-    #or he want to edit something
-    return render(request, 'posts/edit.html', {'form': form}) 
+            return redirect("posts:403")
+
+def delete(request,id):
+    if request.user.is_authenticated and request.user.has_perm('posts.delete_post'):
+        post = get_object_or_404(Post, id=id)
+        if post:
+            if request.user == post.author:
+                post.delete()
+                return redirect("posts:index")
+            else: 
+                return redirect("posts:403")
+        else:
+            content={"errorMessage":"Dany post nie istnieje"}
+            return redirect("posts:404",content=content)
+    else:
+        return redirect("posts:403")
 
 def error404(request):
     return render(request,"posts/error404.html",{})
 
-def delete(request,id):
-    post = get_object_or_404(Post, id=id)
-    if post:
-        post.delete()
-        return redirect("posts:index")
-    else:
-        content={"errorMessage":"Dany post nie istnieje"}
-        return redirect("posts:404",content=content)
+def error403(request):
+    return render(request,"posts/error403.html",{})    
+

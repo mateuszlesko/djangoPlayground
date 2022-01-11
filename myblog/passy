@@ -5,3 +5,13 @@ password:admin1
 REDACTORS:
 login:waclawbohomas
 password:pencil14!@1
+
+USERS:
+login: milosnik
+password: alamakota1
+login: PiotrZ
+password: alamakota1
+
+OTHERS:
+login: nikt
+password: alamakota1
