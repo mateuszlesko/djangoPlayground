@@ -81,7 +81,7 @@ def create(request):
         return redirect("/admin/login/?next=/posts/create")
 
 def edit(request,pk):
-    if request.user.is_authenticated and request.user.has_perm('posts.edit_post'):
+    if request.user.is_authenticated and request.user.has_perm('posts.change_post'):
         post = get_object_or_404(Post, pk=pk)
         #check what state of request is, is user sent data from form
         if post.author == request.user:
