@@ -23,9 +23,11 @@
         </div>
         </div>
     </div>
-    {% if user.is_authenticated %}
+    {% if user.is_authenticated and 'posts.add_comment' in perms %}
     {% include 'posts/addcomments.html' %}
-     {% comment %} <a href="{% url 'posts:createComment' postDetails.id %}" class="btn">Dodaj komentarz</a> {% endcomment %}
+   
+    {% elif not 'posts.add_comment' in perms %}
+        <h2>Nie masz uprawnień aby dodać komentarz </h2>
     {% else %}
         <h2>Zaloguj się aby dodać komentarz</h2>
     {% endif %}

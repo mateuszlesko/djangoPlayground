@@ -1,0 +1,6 @@
+{% extends 'posts/base.html' %}
+{% load static %}
+{% block content%}
+    <h1>{{profile}}</h1>
+    <a href="{% url 'welcome:changePassword' %}">Zmień hasło</a>
+{% endblock %}
