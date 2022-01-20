@@ -6,7 +6,7 @@
                     <a class="menuButton" href="/welcome/login/?next=/posts/">Zaloguj</a>
                 {% else %}
                     <span>{{request.user}}</span>
-                    <a class="menuButton" href="/welcome/logout/?next=posts/">Wyloguj</a>
+                    <a class="menuButton" href="/welcome/logout">Wyloguj</a>
                     {% if 'posts.add_post' in perms%}
                         <a href="{% url "posts:create" %}" class="btn">Stwórz post</a>
                     {% endif %}
