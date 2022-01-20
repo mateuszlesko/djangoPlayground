@@ -3,4 +3,21 @@
 {% block content%}
     <h1>{{profile}}</h1>
     <a href="{% url 'welcome:changePassword' %}">Zmień hasło</a>
+    <h2>Aktywność użytkownika:</h2>
+    <h4>Utworzone posty:</h4>
+    {% for post in createdPosts %}
+        <section>
+                <div class="cardContainer">
+                    <div class="cardContent">
+                         <div class="content-text">
+                            <p>opublikowano: {{post.published_date}}</p>
+                            <h2 class="content-title">{{post.title}}</h2>
+                            <h3 class="content-subtitle">{{post.place}}</h3>
+                            <p class="content-paragraph">{{post.content | truncatewords:24}}...</p>
+                            <a href="{% url 'posts:details' post.id %}" class="btn">Zobacz więcej</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    {% endfor %}
 {% endblock %}

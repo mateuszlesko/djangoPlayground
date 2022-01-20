@@ -1,0 +1,27 @@
+{% extends 'posts/base.html' %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% block content %}
+<h1>Rejestracja użytkownika:</h1>
+	<p style="color:red">{{ error }}</p>
+	<form method="POST" action="/registration">
+		{% csrf_token %}
+
+		{% comment %} <label>Mail:</label>
+		<input type="mail" name="mail" placeholder="user@example.com">
+		<br>
+		<label> Nazwa konta</label>
+		<input type="text" name="username" placeholder="podaj unikalną nazwę">
+		<br>
+		<label>Hasło</label>
+		<input type="password" name="password1" placeholder="podaj hasło" required>
+		<br>
+		<label>Ponów hasło </label>
+		<input type="password" name="password2" placeholder="podaj ponownie" required>
+		<br>
+		<input type="submit" value = "Zarejestruj się"/> {% endcomment %}
+		{{form}}
+		<input type="submit" value = "Zarejestruj się"/> 
+	</form>
+    <p>Jesli, masz juz konto <a href="/login">Zaloguj się</a></p>
+{% endblock %}
