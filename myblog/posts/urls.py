@@ -11,5 +11,6 @@ urlpatterns = [
     path("create",views.create,name="create"),
     path('edit/<int:pk>', views.edit, name='edit'),
     path('delete/<int:id>',views.delete,name="delete"),
-    path('403',views.error403,name="403"),
+    path('details/<int:id>/like',views.like, name="like"),
+    path('403',views.error403,name="403")
 ]

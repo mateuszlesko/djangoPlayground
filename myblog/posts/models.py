@@ -4,11 +4,13 @@ from django.utils import timezone
 
 # Create your models here.
 
+
 class Place(models.Model):
     town = models.CharField(max_length=32)
 
     def __str__(self):
         return f"{self.town}"
+
 
 class Post(models.Model):
     title = models.CharField(max_length=32)
@@ -33,3 +35,9 @@ class Comment(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey('auth.User',on_delete=models.CASCADE)
     post = models.ForeignKey(Post,on_delete=models.CASCADE)
+
+
+class VisitedPlace(models.Model):
+    user = models.ForeignKey('auth.User',on_delete=models.CASCADE)
+    place = models.ForeignKey(Post,on_delete= models.CASCADE,verbose_name="odwiedzone miejsce")
+    likeIt = models.BooleanField(verbose_name="czy miejsce spodobało się")

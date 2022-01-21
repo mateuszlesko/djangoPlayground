@@ -23,6 +23,13 @@
         </div>
         </div>
     </div>
+    {% if user.is_authenticated %}
+        {% if not visited %}
+            <a href="{% url 'posts:like' postDetails.id %}" >Byłem!</a>
+        {% else %}
+            <p>Odwiedzone!</p>
+        {% endif %}
+    {% endif %}
     {% if user.is_authenticated and 'posts.add_comment' in perms %}
     {% include 'posts/addcomments.html' %}
    
