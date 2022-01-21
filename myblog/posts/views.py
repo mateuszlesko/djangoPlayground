@@ -1,4 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect 
+from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 from django.http.response import Http404
 from django.template import loader
@@ -13,10 +14,12 @@ towns = Place.objects.all()
 
 def index(request):
     if request.method == "GET":
-        posts = Post.objects.all()
+        nrPage = request.GET.get('page', 1)
+        
+        paginator = Paginator(Post.objects.all(),2)   
         template = loader.get_template("posts/index.html")
         context = {
-            "all_posts": reversed(list(posts)),
+            "all_posts": paginator.page(nrPage),
             "all_towns": towns
         }
         return HttpResponse(template.render(context,request))
@@ -24,7 +27,7 @@ def index(request):
         submit = request.POST.get("submit")
         form = PlaceForm(request.POST)
         town = form["town"].value()
-        context =Post.objects.filter(place__town = town)
+        context =Paginator(Post.objects.filter(place__town = town),2)
         return render(request,"posts/index.html",{"all_posts":context,"all_towns":towns})
 
 def details(request, id):
