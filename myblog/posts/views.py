@@ -4,9 +4,10 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.http.response import Http404
 from django.template import loader
 from django.utils import timezone
+from numpy import place
 
-from .models import Comment, Place, Post
-from .forms import CommentForm, PostingForm, PlaceForm
+from .models import Comment, Place, Post, VisitedPlace
+from .forms import CommentForm, PostingForm, PlaceForm, LikeForm
 
 # Create your views here.
 
@@ -30,6 +31,19 @@ def index(request):
         context =Paginator(Post.objects.filter(place__town = town),2)
         return render(request,"posts/index.html",{"all_posts":context,"all_towns":towns})
 
+
+def like(request,id):
+    if request.method == "GET":
+        if( not VisitedPlace.objects.filter(place__id=id, user__id=request.user.id).exists()):
+            post = Post.objects.get(id = id)
+            visited = VisitedPlace()
+            visited.likeIt = True
+            visited.place = post
+            visited.user = request.user
+            visited.save() 
+    return redirect("posts:details",id)   
+
+
 def details(request, id):
     try:
         if request.method == "GET":
@@ -39,13 +53,15 @@ def details(request, id):
                 "postDetails":post,
                 "currentUser":request.user,
                 "authorUser":post.author,
-                "comments": Comment.objects.filter(post__id = id)
+                "comments": Comment.objects.filter(post__id = id),
+                "visited": VisitedPlace.objects.filter(place__id=id, user__id=request.user.id).exists()
             }
             return HttpResponse(template.render(context,request))
         else:
             if request.method == "POST":
                 if request.user.has_perm('posts.add_comment'):
                     form = CommentForm(request.POST)
+                    form2 = LikeForm(request.POST)
                     if form.is_valid():
                         comment = Comment()
                         comment.author = request.user
