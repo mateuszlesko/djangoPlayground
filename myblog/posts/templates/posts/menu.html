@@ -5,7 +5,7 @@
                 {% if not request.user.is_authenticated %}
                     <a class="menuButton" href="/welcome/login">Zaloguj</a>
                 {% else %}
-                    <span>{{request.user}}</span>
+                    <a class="profileName">{{request.user}}</a>
                     <a class="menuButton" href="/welcome/logout">Wyloguj</a>
                     {% if 'posts.add_post' in perms%}
                         <a href="{% url "posts:create" %}" class="btn">Stwórz post</a>
@@ -13,6 +13,6 @@
                     <a href="{% url 'welcome:profile' %}">Twój profil</a>
                 {% endif %}
                 <hr/>
-                <a href="/">Strona główna</a>
+                <a href="/posts">Strona główna</a>
             </div>
     </aside>

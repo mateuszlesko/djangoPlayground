@@ -10,7 +10,7 @@
                             <h2 class="content-title">{{post.title}}</h2>
                             <h3 class="content-subtitle">{{post.place}}</h3>
                             <p class="content-paragraph">{{post.content | truncatewords:24}}...</p>
-                            <a href="{% url 'posts:details' post.id %}" class="btn">Zobacz więcej</a>
+                            <a href="/posts/details/{{post.id}}" class="btn">Zobacz więcej</a>
                         </div>
                     </div>
                 </div>
