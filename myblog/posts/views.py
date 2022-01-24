@@ -4,7 +4,6 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.http.response import Http404
 from django.template import loader
 from django.utils import timezone
-from numpy import place
 
 from .models import Comment, Place, Post, VisitedPlace
 from .forms import CommentForm, PostingForm, PlaceForm, LikeForm

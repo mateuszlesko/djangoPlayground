@@ -19,25 +19,25 @@
             <h3>Nie ma postów</h3>
         {% endfor %}
         {% if all_posts.has_other_pages %}
-        <ul class="pagination">
+        <div class="pagination">
             {% if all_posts.has_previous %}
-            <li><a href="?page={{ all_posts.previous_page_number }}">&laquo;</a></li>
+            <a href="?page={{ all_posts.previous_page_number }}">&laquo;</a>
             {% else %}
-            <li class="disabled"><span>&laquo;</span></li>
+            <a><span class="disabled">&laquo;</span></a>
             {% endif %}
             {% for i in all_posts.paginator.page_range %}
             {% if all_posts.number == i %}
-                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                <a class="active">{{ i }}</a>
             {% else %}
-                <li><a href="?page={{ i }}">{{ i }}</a></li>
+                <a href="?page={{ i }}">{{ i }}</a>
             {% endif %}
             {% endfor %}
             {% if all_posts.has_next %}
             
-            <li><a href="?page={{ all_posts.next_page_number }}">&raquo;</a></li>
+            <a href="?page={{ all_posts.next_page_number }}">&raquo;</a>
             {% else %}
-            <li class="disabled"><span>&raquo;</span></li>
+            <a><span class="disabled">&raquo;</span></a>
             {% endif %}
-        </ul>
+        </div>
         {% endif %}
     {% endblock %}

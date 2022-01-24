@@ -9,17 +9,31 @@
     </head>
     <body>
         {% include 'posts/menu.html' %}
-        <header  id="topnavID">
-            <div class="titleContainer">
-                <h1 class="title">
-                    Art of 3City
-                </h1>
+        <header class="topnav" id="topnavID">
+            <div class="topnav-centered">
+                <a href="/posts">Art of 3city</a>
             </div>
-            <span class ="menuButton" onclick="openNav()">&#9776; Menu</span>
+            <a class ="menuButton" onclick="openNav()">&#9776; Menu</a>
+
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
+             
         </header>
+       
         <div class="container">
             {% block content %}
             {% endblock %}
         </div>
+        <script>
+            function myFunction() {
+                var x = document.getElementById("myTopnav");
+                if (x.className === "topnav") {
+                    x.className += " responsive";
+                } else {
+                    x.className = "topnav";
+                }
+            }
+        </script>
     </body>
 </html>
