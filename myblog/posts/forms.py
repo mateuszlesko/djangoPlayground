@@ -17,9 +17,3 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ("text",)
-
-class LikeForm(forms.ModelForm):
-    class Meta:
-        model = VisitedPlace
-        fields = ("likeIt",)
-

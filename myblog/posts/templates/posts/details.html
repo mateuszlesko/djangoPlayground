@@ -31,6 +31,7 @@
         {% endif %}
     {% endif %}
     {% if user.is_authenticated and 'posts.add_comment' in perms %}
+    <p style="color:red;">{{comment_empty}}</p>
     {% include 'posts/addcomments.html' %}
    
     {% elif not 'posts.add_comment' in perms %}

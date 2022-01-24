@@ -1,4 +1,6 @@
-from django.http import HttpResponse, HttpResponseRedirect 
+from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required 
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 from django.http.response import Http404
@@ -6,7 +8,8 @@ from django.template import loader
 from django.utils import timezone
 
 from .models import Comment, Place, Post, VisitedPlace
-from .forms import CommentForm, PostingForm, PlaceForm, LikeForm
+from .forms import CommentForm, PostingForm, PlaceForm
+from .decortators import right_role
 
 # Create your views here.
 
@@ -27,10 +30,12 @@ def index(request):
         submit = request.POST.get("submit")
         form = PlaceForm(request.POST)
         town = form["town"].value()
-        context =Paginator(Post.objects.filter(place__town = town),2)
+        paginator = Paginator(Post.objects.filter(place__town = town),2)
+        context = paginator.page(1)
         return render(request,"posts/index.html",{"all_posts":context,"all_towns":towns})
 
 
+@login_required
 def like(request,id):
     if request.method == "GET":
         if( not VisitedPlace.objects.filter(place__id=id, user__id=request.user.id).exists()):
@@ -60,8 +65,10 @@ def details(request, id):
             if request.method == "POST":
                 if request.user.has_perm('posts.add_comment'):
                     form = CommentForm(request.POST)
-                    form2 = LikeForm(request.POST)
                     if form.is_valid():
+                        if form["text"].value == "":
+                           post = Post.objects.get(id = id)
+                           return redirect("posts:details",request = request, id=id,context={"postDetails":post,"comment_empty":"Nie można dodać pustego komentarza"})
                         comment = Comment()
                         comment.author = request.user
                         comment.text = form["text"].value()
@@ -77,9 +84,10 @@ def details(request, id):
     template = loader.get_template("posts/index.html")
     return HttpResponse(template.render({},request))
 
-def create(request):
 
-    if request.user.is_authenticated:
+@login_required
+#@right_role(roles=["admin","redaktorzy"])
+def create(request):
         if request.user.has_perm('posts.add_post'):
             if request.method == "POST":
                 form = PostingForm(request.POST,request.FILES)
@@ -95,7 +103,7 @@ def create(request):
                 return render(request,"posts/create.html",{"form":form})
         else:
             return redirect('posts:403')
-    else:
+
         return redirect("/admin/login/?next=/posts/create")
 
 def edit(request,pk):
