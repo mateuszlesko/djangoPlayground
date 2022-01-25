@@ -1,11 +1,7 @@
 {% extends 'posts/base.html' %}
 {% load static %}
 {% block content%}
-    {% if content.status == True %}
-        <h1>Pomyślnie wylogowano</h1>
-        <a class="menuButton" href="posts/">Wróć na stronę główną</a>
-    {% else %}
-        <h1>Napotkano problemy</h1>
-        <a class="menuButton" href="/logout">Spróbuj ponownie</a>
-    {% endif %}
+    <h1>Pomyślnie wylogowano</h1>
+    <a class="menuButton" href="/posts/">Wróć na stronę główną</a>
+
 {% endblock %}

@@ -35,7 +35,7 @@ def index(request):
         return render(request,"posts/index.html",{"all_posts":context,"all_towns":towns})
 
 
-@login_required
+@login_required(login_url='/welcome/login')
 def like(request,id):
     if request.method == "GET":
         if( not VisitedPlace.objects.filter(place__id=id, user__id=request.user.id).exists()):
@@ -85,7 +85,7 @@ def details(request, id):
     return HttpResponse(template.render({},request))
 
 
-@login_required
+@login_required(login_url='/welcome/login')
 #@right_role(roles=["admin","redaktorzy"])
 def create(request):
         if request.user.has_perm('posts.add_post'):
@@ -104,7 +104,8 @@ def create(request):
         else:
             return redirect('posts:403')
 
-        return redirect("/admin/login/?next=/posts/create")
+        return redirect("/welcome/login?next=/posts/create")
+
 
 def edit(request,pk):
     if request.user.is_authenticated and request.user.has_perm('posts.change_post'):

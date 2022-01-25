@@ -1,17 +1,17 @@
 ADMIN:
 login:admin
-password:admin1
+password:kernel21
 
 REDACTORS:
 login:waclawbohomas
-password:pencil14!@1
+password:kernel21
 
 USERS:
 login: milosnik
-password: alamakota1
+password: kernel21
 login: PiotrZ
-password: alamakota1
+password: kernel21
 
 OTHERS:
 login: nikt
-password: alamakota1
+password: kernel21
