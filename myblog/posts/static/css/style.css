@@ -175,17 +175,23 @@ a.button{
     text-align: left;
   }
   
+  .textbox{
+    border: none;
+    border-bottom: solid 1px black;
+    display: block;
+  }
+
   .submit{
     border: none;
-  color: white;
-  padding: 12px 24px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  transition-duration: 0.4s;
-  cursor: pointer;
+    color: white;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
     background-color: white;
     color: black;
     border: 2px solid black;

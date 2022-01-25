@@ -73,6 +73,8 @@ def changePassword(request):
         if user and (password1 == password2):
             user.set_password(password1)
             user.save()
+            user = authenticate(request, username=username, password=password1)
+            login(request, user)
             return redirect("welcome/profile")
         else:
             return render(request,"welcome/changePassword.html",{"ok":False})
