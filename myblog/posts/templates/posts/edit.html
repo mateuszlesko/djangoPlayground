@@ -1,10 +1,16 @@
 {% extends 'posts/base.html' %}
 
 {% block content %}
-<h2>Edytuj post:</h2>
+<div class="cardContainer">
+<div class="cardContent">
+ <div class="content-text">
+ <h2>Edytuj post:</h2>
 <form  method="POST">
     {% csrf_token %}
    {{form.as_p}}
-    <input type="submit" value="OK"> 
+    <input class="submit" type="submit" value="Edytuj"> 
 </form>
 {% endblock %}
+</div>
+</div>
+</div>

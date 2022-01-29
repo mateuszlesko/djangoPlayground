@@ -1,6 +1,10 @@
 {% extends 'posts/base.html' %}
 {% load static %}
 {% block content%}
+
+    <div class="cardContainer">
+    <div class="cardContent">
+    <div class="content-text">
     <h1>Witaj {{profile}},</h1>
     <h3>cieszymy się, że jesteś z nami!</h3>
     <a href="{% url 'welcome:changePassword' %}">Zmień hasło</a>
@@ -41,4 +45,7 @@
     {% empty %}
     <p>Brak odwiedzonych miejsc</p>
     {% endfor %}
+    </div>
+    </div>
+    </div>
 {% endblock %}

@@ -1,7 +1,7 @@
     {% block addcomments %}
         <form  method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            <input name="text" type="textarea" placeholder="dodaj komentarz"> 
-            <input type="submit" value="dodaj komentarz"> 
+            <textarea class="textbox" name="text" rows='5' cols='64' placeholder="dodaj komentarz"></textarea> 
+            <input class="submit" type="submit" value="dodaj komentarz"> 
         </form>
     {% endblock %}
