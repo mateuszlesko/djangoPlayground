@@ -1,10 +1,16 @@
 {% extends 'posts/base.html' %}
 
 {% block content %}
+<div class="cardContainer">
+<div class="cardContent">
+ <div class="content-text">
 <h2>Dodaj nowy post:</h2>
 <form  method="POST" enctype="multipart/form-data">
     {% csrf_token %}
    {{form.as_p}}
     <input class="submit" type="submit" value="Stwórz post"> 
 </form>
+</div>
+</div>
+</div>
 {% endblock %}

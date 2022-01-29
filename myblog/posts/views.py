@@ -18,8 +18,8 @@ towns = Place.objects.all()
 def index(request):
     if request.method == "GET":
         nrPage = request.GET.get('page', 1)
-        
-        paginator = Paginator(Post.objects.all(),2)   
+        posts = Post.objects.all()
+        paginator = Paginator(posts,2)   
         template = loader.get_template("posts/index.html")
         context = {
             "all_posts": paginator.page(nrPage),
